@@ -30,14 +30,14 @@ class Weather {
 
   Weather.fromJson(Map<String, dynamic> json) {
     coord = json['coord'] != null ? Coord.fromJson(json['coord']) : null;
+    weatherData = <WeatherData>[];
     if (json['weather'] != null) {
-      weatherData = <WeatherData>[];
       json['weather'].forEach((v) {
         weatherData!.add(WeatherData.fromJson(v));
       });
     }
     base = json['base'];
-    main = json['main'] != null ? Main.fromJson(json['main']) : null;
+    main = json['main'] != null ? Main.fromJson(json['main']) : Main();
     visibility = json['visibility'];
     wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
     clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;

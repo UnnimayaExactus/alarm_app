@@ -18,6 +18,11 @@ class AlarmHomeController extends GetxController {
   TimeOfDay _time = TimeOfDay.now();
   TimeOfDay? picked;
   DateTime? alarmdateTime;
+  @override
+  void onInit() {
+    getCurrentLocation();
+    super.onInit();
+  }
 
   var alarmSettings;
   addAlarm(dateTime, notificationTitle, notificationBody) async {
@@ -143,6 +148,7 @@ class AlarmHomeController extends GetxController {
     if (!serviceEnabled) {
       isError = true;
       error = "Location services are disabled & then restart the application!";
+      update();
       // });
       return Future.error('Location services are disabled.');
     }
@@ -165,6 +171,7 @@ class AlarmHomeController extends GetxController {
         .then((value) {
       lat = value.latitude;
       lon = value.longitude;
+      update();
       print('LATITUDE $lat');
       print('LONGITUDE $lon');
       getCityName();
@@ -181,10 +188,8 @@ class AlarmHomeController extends GetxController {
     // setState(() {
     location =
         '${place.subLocality != '' ? place.subLocality : place.locality}';
+    update();
     getCurrentWeather(location);
-    print(
-        '========LOCATION====${place.locality}=${place.subLocality}==$location');
-    // });
   }
 
   // getWeatherData() async {

@@ -29,7 +29,6 @@ class _ExampleAlarmHomeScreenState extends State<ExampleAlarmHomeScreen> {
     if (Alarm.android) {
       checkAndroidNotificationPermission();
       checkAndroidScheduleExactAlarmPermission();
-      controller.getCurrentLocation();
     }
     loadAlarms();
     subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
